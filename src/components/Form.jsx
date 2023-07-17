@@ -11,6 +11,7 @@ const Form = () => {
   const [all, setAll] = useState(false);
   const [operator, setOperator] = useState();
   const [date, setDate] = useState();
+  const [dateOperator, setDateOperator] = useState();
 
   const [data, setData] = useState([]);
 
@@ -21,6 +22,8 @@ const Form = () => {
         setOperator(name);
     } else if (firstDate !== "none" && lastDate !== "none" && name === "") {
         setDate(`${firstDate},${lastDate}`);
+    } else {
+        setDateOperator(`${firstDate},${lastDate},${name}`);
     }
     setFirstDate("none");
     setLastDate("none");
@@ -39,6 +42,10 @@ const Form = () => {
   useEffect(() => {
     get.findByDates(date).then((obj) => setData(obj));
   }, [date]);
+
+  useEffect(() => {
+    get.findByDatesOperator(dateOperator).then((obj) => setData(obj));
+  }, [dateOperator]);
 
   return (
     <>
