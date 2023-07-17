@@ -1,0 +1,29 @@
+#bank {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#bank td, #bank th {
+    border: 1px solid #000000;
+    padding: 8px;
+}
+
+#bank tr:nth-child(even){background-color: #8a8a8a;}
+
+#bank tr:hover {background-color: #cecece;}
+
+#bank th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #084052;
+    color: rgb(252, 252, 252);
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 0;
+    text-align: left;
+    font-size: large;
+}
