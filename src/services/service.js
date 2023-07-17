@@ -29,9 +29,22 @@ const findByNameOperador = async (nome) => {
     return data;
 }
 
+const findByDates = async (date) => {
+    const dates = date.split(",");
+    const first = `${dates[0]} 00:00:00`;
+    const last = `${dates[1]} 00:00:00`;
+    const response = await fetch(`${url}/transferencia/datas?first=${first}&last=${last}`, {
+        method: 'GET',
+        mode: 'cors',
+    });
+    const data = await response.json();
+    return data;
+}
+
 const get = {
     findByIdConta,
     findAll,
-    findByNameOperador
+    findByNameOperador,
+    findByDates
 };
 export default get;
