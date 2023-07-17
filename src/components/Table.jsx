@@ -1,9 +1,16 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 
-const Table = ({ data }) => {
+const Table = ({ data, totalBalance, periodBalance }) => {
+
     return (
         <table>
+            <thead>
+                <tr>
+                    <th>Saldo Total: R$ {totalBalance}</th>
+                    <th>Saldo no Período: R$ {periodBalance}</th>
+                </tr>
+            </thead>
             <thead>
                 <tr>
                     <th>Dados</th>
@@ -21,7 +28,7 @@ const Table = ({ data }) => {
                         return (
                             <tr key={d.id}>
                                 <td>{`${day}/${month}/${date.getFullYear()}`}</td>
-                                <td>R$ {d.valor}</td>
+                                <td>R$ {d.valor.toFixed(2)}</td>
                                 <td>{d.tipo}</td>
                                 <td>{d.nomeOperadorTransacao ? d.nomeOperadorTransacao : "----"}</td>
                             </tr>

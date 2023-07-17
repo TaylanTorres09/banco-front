@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import "./css/Form.css";
 import get from "../services/service";
@@ -14,6 +15,8 @@ const Form = () => {
   const [dateOperator, setDateOperator] = useState();
 
   const [data, setData] = useState([]);
+  const [totalBalance, setTotalBalance] = useState(0);
+  const [periodBalance, setPeriodBalance] = useState(0);
 
   const handleSearch = () => {
     if (firstDate === "none" && lastDate === "none" && name === "") {
@@ -30,21 +33,41 @@ const Form = () => {
     setName("");
   };
 
+  const calcBalance = (data) => {
+    const total = data.reduce((result, val) => {
+      return (result + val.valor);
+    }, 0);
+    return total.toFixed(2);
+  }
+
   useEffect(() => {
-    get.findAll().then((obj) => setData(obj));
+    get.findAll().then((obj) => {
+      setData(obj);
+      setTotalBalance(calcBalance(obj));
+      setPeriodBalance(calcBalance(obj));
+    });
     setAll(false);
   }, [all]);
 
   useEffect(() => {
-    get.findByNameOperador(operator).then((obj) => setData(obj));
+    get.findByNameOperador(operator).then((obj) => {
+      setData(obj);
+      setPeriodBalance(calcBalance(obj));
+    });
   }, [operator]);
 
   useEffect(() => {
-    get.findByDates(date).then((obj) => setData(obj));
+    get.findByDates(date).then((obj) => {
+      setData(obj);
+      setPeriodBalance(calcBalance(obj));
+    });
   }, [date]);
 
   useEffect(() => {
-    get.findByDatesOperator(dateOperator).then((obj) => setData(obj));
+    get.findByDatesOperator(dateOperator).then((obj) => {
+      setData(obj);
+      setPeriodBalance(calcBalance(obj));
+    });
   }, [dateOperator]);
 
   return (
@@ -79,7 +102,8 @@ const Form = () => {
 
         <input type="button" value="Pesquisar" onClick={handleSearch} />
       </form>
-      <Table data={data} />
+
+      <Table data={data} totalBalance={totalBalance} periodBalance={periodBalance} />
     </>
   );
 };
