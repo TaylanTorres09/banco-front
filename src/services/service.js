@@ -20,8 +20,18 @@ const findAll = async () => {
     return data;
 }
 
+const findByNameOperador = async (nome) => {
+    const response = await fetch(`${url}/transferencia/${nome}`, {
+        method: 'GET',
+        mode: 'cors',
+    });
+    const data = await response.json();
+    return data;
+}
+
 const get = {
     findByIdConta,
     findAll,
+    findByNameOperador
 };
 export default get;
