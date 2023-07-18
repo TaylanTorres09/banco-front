@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import "./css/Form.css";
@@ -25,8 +26,10 @@ const Form = () => {
         setOperator(name);
     } else if (firstDate !== "none" && lastDate !== "none" && name === "") {
         setDate(`${firstDate},${lastDate}`);
-    } else {
+    } else if (firstDate !== "none" && lastDate !== "none" && name !== "") {
         setDateOperator(`${firstDate},${lastDate},${name}`);
+    } else {
+        alert("Cheque os dados de pesquisa");
     }
     setFirstDate("none");
     setLastDate("none");
